@@ -120,32 +120,35 @@ int lessCrappyCalc() {
 }
 
 int addition() {
-  int i, num, add_num;
-  int sum[10];
+  int i, arr_size, add_num;
+  int* sum;
 
   printf("How many numbers do you want to add: ");
-  scanf("%d", &num);
-  if (num >= 10) {
-    printf("This can only add upto 10 numbers.");
+  scanf("%d", &arr_size);
+  sum = calloc(arr_size, sizeof(int));
+  if (sum == NULL) {
+    printf("There is not enough memory to add %d numbers.", arr_size);
     return 1;
   }
   printf("Enter a number followed by enter: ");
 
-  for (i = 0; i < num; i++) {
+  for (i = 0; i < arr_size; i++) {
     scanf("%d", &add_num);
     sum[i] = add_num;
   }
 
   int acc = 0;
-  for (i = 0; i < num; i++) {
+  for (i = 0; i < arr_size; i++) {
     printf("%d ", sum[i]);
-    if (i != num - 1) {
+    if (i != arr_size - 1) {
       printf("+ ");
     }
     acc = acc + sum[i];
   }
 
   printf(" = %d", acc);
+  free(sum);
+
   return 0;
 }
 
